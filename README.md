@@ -119,17 +119,16 @@ Expected: New ticket created successfully from found available seat
 ## Backup Instructions
 
 ### Run Backup Script
-The backup.sql script creates backup copies of all tables with date prefix.
+backup.sql script creates backup copies of all tables with date prefix
 
 1. Click "SQL" tab in phpMyAdmin
 2. Open `backup.sql` file and paste content to query box
 4. Click "Go"
 
-This creates backup tables like:
+Backup filename format examples:
 - `backup_20251123_THEATRE`
 - `backup_20251123_AUDITORIUM`
 - `backup_20251123_SEAT`
-- etc.
 
 **Verify backup:**
 ```sql
@@ -144,7 +143,7 @@ SELECT COUNT(*) FROM backup_20251123_TICKET;
 - **3 Theatres** in Los Angeles/Beverly Hills area
 - **11 Auditoriums** with different screen types (Standard, IMAX, Dolby)
 - **~1800 Seats** across all auditoriums
-- **15 Movies** (Avengers, Spider-Man, Barbie, etc.)
+- **15 Movies**
 - **70 Customers** (50 registered + 20 guest checkout)
 - **90 Showtimes** over 2 weeks
 - **~450 Tickets** sold
@@ -165,5 +164,10 @@ SELECT COUNT(*) FROM backup_20251123_TICKET;
 
 ## Notes
 
-- Pricing: Base price ($8 matinee / $12 evening) + seat type modifier - discount
 - Showtimes use dynamic dates so view 3 always works
+
+**Pricing:**
+- Base: $8 (matinee) / $12 (evening)
+- Premium seats: +$3
+- Discounts: Student -$2, Senior -$3, Child -$4
+- Formula: Base Price + Seat Type - Discount
