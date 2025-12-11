@@ -159,7 +159,7 @@ All showtimes use dynamic dates (CURDATE() + intervals), so they're always curre
 - Price reflects discounts and premium seats
 
 **6. Lookup Tickets**
-- Navbar → **"My Tickets"**
+- Navbar > **"My Tickets"**
 - Enter email: `john.smith1@email.com` OR Order Code: `A7B3C9F1`
 - Click **"Search Tickets"**
 - View existing tickets from the pre-loaded demo data
@@ -171,4 +171,4 @@ All showtimes use dynamic dates (CURDATE() + intervals), so they're always curre
 - Status changes to "Refunded"
 
 **8. View Reports**
-- Navbar → **"Reports"**
+- Navbar > **"Reports"**
