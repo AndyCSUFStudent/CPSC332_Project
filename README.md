@@ -1,173 +1,175 @@
-# Movie Theatre Database - Part B
-**Andrew Rivera**  
-**CPSC 332**
+# Rivera Cinemas - Movie Theatre Ticket System
+
+**CPSC 332 Database Project - Part C**  
+**Student:** Andrew Rivera  
+**Course:** Database Management Systems
+
+A complete movie theatre ticket booking system built with PHP and MySQL, featuring seat selection, discount management, and business analytics.
 
 ---
 
-## Database Setup Instructions
+## Prerequisites
 
-### Requirements
-- XAMPP installed and running
-- MySQL service started
-- phpMyAdmin accessible at http://localhost/phpmyadmin
-
----
-
-## Loading the Database
-
-### Step 1: Create Tables (DDL)
-1. Open phpMyAdmin
-2. Click "SQL" tab
-3. Open `ddl.sql` file and paste content to query window
-5. Click "Go"
-6. Verify 8 tables created: THEATRE, AUDITORIUM, SEAT, MOVIE, CUSTOMER, SHOWTIME, TICKET, TICKET_AUDIT
-
-### Step 2: Load Data (Seed)
-1. Click "SQL" tab
-2. Open `seed.sql` file and paste content to query window
-4. Click "Go"
-
-### Step 3: Create Views
-1. Click "SQL" tab
-2. Open `views.sql` file and paste content to query window
-4. Click "Go"
-
-### Step 4: Create Triggers
-1. Click "SQL" tab
-2. Open `triggers.sql` file and paste content to query window
-4. Click "Go"
-
-### Step 5: Create Stored Procedures
-1. Click "SQL" tab
-2. Open `procedures.sql` file and paste content to query window
-4. Click "Go"
+- PHP 7.4 or higher
+- MySQL 5.7 or higher
+- Web server (Apache/Nginx) or PHP built-in server
+- Web browser
 
 ---
 
-## Test Queries
+## Installation & Setup
 
-### Test Views
+### 1. Extract Project Files
 
-**View 1: Top Movies by Tickets**
+Extract the project ZIP file to your desired location. You should see:
+- `public/` folder with PHP files
+- `includes/` folder with configuration files
+- `assets/` folder with CSS
+- `sql/` folder with database files
+
+### 2. Database Setup
+
+**Run each SQL file in this order:**
+
+1. **Create Tables** - Copy and paste `sql/ddl.sql` into MySQL and execute
+2. **Insert Sample Data** - Copy and paste `sql/seed.sql` into MySQL and execute
+3. **Create Views** - Copy and paste `sql/views.sql` into MySQL and execute
+4. **Create Stored Procedures** - Copy and paste `sql/procedures.sql` into MySQL and execute
+5. **Create Triggers** - Copy and paste `sql/triggers.sql` into MySQL and execute
+
+**Important:** Run the files in this exact order. Each file depends on the previous ones.
+
+**Verification:** After running all files, check that the database is ready:
+
 ```sql
-SELECT * FROM top_movies_by_tickets LIMIT 5;
+USE movie_theatre;
+SHOW TABLES;  -- Should show 8 tables
+SELECT COUNT(*) FROM MOVIE;  -- Should return 15 movies
+SELECT COUNT(*) FROM CUSTOMER;  -- Should return 70 customers
+SELECT COUNT(*) FROM TICKET;  -- Should return 450+ tickets
 ```
 
-**View 2: Sold Out Showtimes**
-```sql
-SELECT * FROM sold_out_showtimes;
+### 3. Configure Database Connection
+
+Edit `includes/config.php` with your MySQL credentials:
+
+```php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'movie_theatre');
+define('DB_USER', 'root');
+define('DB_PASS', 'your_password');
 ```
 
-**View 3: Theatre Utilization**
-```sql
-SELECT * FROM theatre_utilization;
-```
+### 4. Start the Application
 
-### Test Triggers
+**Using XAMPP:**
 
-**Test Trigger 1: Prevent Double Booking**
-```sql
--- Trying to book an already booked seat
-INSERT INTO TICKET (showtime_id, seat_id, customer_id, final_price, seat_type, discount_type, status)
-VALUES (1, 1, 10, 12.00, 'Standard', 'None', 'Active');
-```
-Expected: Error message "This seat is already booked for this showtime"
-
-**Test Trigger 2: Audit Refunds**
-```sql
--- Refund a ticket
-UPDATE TICKET SET status = 'Refunded' WHERE ticket_id = 1;
-
--- Check audit log
-SELECT * FROM TICKET_AUDIT;
-```
-Expected: See refund logged in TICKET_AUDIT table
-
-### Test Stored Procedure
-
-**Procedure 1: Get Available Seats**
-```sql
-CALL get_available_seats(2);
-```
-Expected: Returns list of available seats for showtime 2
-
-**Procedure 2: Get Customer Tickets**
-```sql
-CALL get_customer_tickets(1);
-```
-Expected: Returns all tickets purchased by customer 1
-
-**Procedure 3: Sell Ticket**
-```sql
--- Find available seat in auditorium_id 2
-SELECT s.seat_id 
-FROM SEAT s
-WHERE s.auditorium_id = 2
-  AND s.seat_id NOT IN (SELECT seat_id FROM TICKET WHERE showtime_id = 1)
-LIMIT 1;
-
--- Use found seat_id (example: 50)
-CALL sell_ticket(1, 50, 5, 'Student');
-
--- Verify
-SELECT * FROM TICKET WHERE showtime_id = 1 AND seat_id = 50;
-```
-Expected: New ticket created successfully from found available seat
+1. Copy project folder to `htdocs` (XAMPP)
+2. Configure virtual host to point to the `public` folder
+3. Start Apache server
+4. Visit: `http://localhost/rivera-cinemas/`
 
 ---
 
-## Backup Instructions
+## Sample Credentials & Demo Data
 
-### Run Backup Script
-backup.sql script creates backup copies of all tables with date prefix
+### Demo Customers with Pre-Loaded Tickets
 
-1. Click "SQL" tab in phpMyAdmin
-2. Open `backup.sql` file and paste content to query box
-4. Click "Go"
+**The database includes 70 pre-existing customers with 450+ tickets already purchased.** You can test the "My Tickets" feature with these accounts:
 
-Backup filename format examples:
-- `backup_20251123_THEATRE`
-- `backup_20251123_AUDITORIUM`
-- `backup_20251123_SEAT`
+- **Email:** `john.smith1@email.com` → **Order Code:** `A7B3C9F1`
+- **Email:** `emma.johnson2@email.com` → **Order Code:** `D4E6F8A2`
+- **Email:** `michael.williams3@email.com` → **Order Code:** `E9C2B5F3`
 
-**Verify backup:**
-```sql
-SHOW TABLES LIKE 'backup_%';
-SELECT COUNT(*) FROM backup_20251123_TICKET;
-```
+### Sample Movies Available
 
----
+The database contains 15 movies:
 
-## Database Summary
+1. **Avengers: Endgame** (PG-13, Action, 2019)
+2. **Avatar: The Way of Water** (PG-13, Sci-Fi, 2022)
+3. **Spider-Man: No Way Home** (PG-13, Action, 2021)
+4. **Top Gun: Maverick** (PG-13, Action, 2022)
+5. **Barbie** (PG-13, Comedy, 2023)
+6. **Oppenheimer** (R, Drama, 2023)
+7. **Inside Out 2** (PG, Family, 2024)
+8. **Dune: Part Two** (PG-13, Sci-Fi, 2024)
+9. **Inception** (PG-13, Sci-Fi, 2010)
+10. **The Batman** (PG-13, Action, 2022)
+11. **Guardians of the Galaxy** (PG-13, Action, 2014)
+12. **Black Panther** (PG-13, Action, 2018)
+13. **Interstellar** (PG-13, Sci-Fi, 2014)
+14. **Deadpool & Wolverine** (R, Action, 2024)
+15. **The Super Mario Bros Movie** (PG, Family, 2023)
 
-- **3 Theatres** in Los Angeles/Beverly Hills area
-- **11 Auditoriums** with different screen types (Standard, IMAX, Dolby)
-- **~1800 Seats** across all auditoriums
-- **15 Movies**
-- **70 Customers** (50 registered + 20 guest checkout)
-- **90 Showtimes** over 2 weeks
-- **~450 Tickets** sold
+### Theatres
 
----
+- **Cineplex Downtown** - Los Angeles, CA (4 auditoriums)
+- **Starlight Cinema** - Los Angeles, CA (4 auditoriums)
+- **Regal West** - Beverly Hills, CA (3 auditoriums)
 
-## Files Included
+### Showtimes
 
-1. `ddl.sql` - Creates database tables
-2. `seed.sql` - Loads sample data
-3. `views.sql` - Creates 3 views
-4. `triggers.sql` - Creates 2 triggers
-5. `procedures.sql` - Creates 1 stored procedure
-6. `backup.sql` - Backup instructions
-7. `README.md` - This current file
+All showtimes use dynamic dates (CURDATE() + intervals), so they're always current:
+- **90 total showtimes** across 7-8 days
 
 ---
 
-## Notes
+## Test Click Path
 
-- Showtimes use dynamic dates so view 3 always works
+### Test with Pre-Loaded Demo Data
 
-**Pricing:**
-- Base: $8 (matinee) / $12 (evening)
-- Premium seats: +$3
-- Discounts: Student -$2, Senior -$3, Child -$4
-- Formula: Base Price + Seat Type - Discount
+1. Go to `http://localhost:8000`
+2. Click navbar **"My Tickets"**
+3. Enter email: `john.smith1@email.com` OR Order Code: `A7B3C9F1`
+4. Click **"Search Tickets"**
+5. You should see existing tickets for John Smith
+6. Try the **"Refund"** button on any Active ticket
+7. Go to **"Reports"** to see analytics
+
+### Complete Purchase Flow
+
+**Full walkthrough of creating a new ticket purchase:**
+
+**1. Browse Movies**
+- Go to `http://localhost:8000`
+- Click **"View All Movies"** or navbar **"Movies"**
+- Filter by rating: Select **"PG-13"**
+- Click on **"Dune: Part Two"** to view details
+
+**2. Find Showtimes**
+- From movie detail page, click **"Find Showtimes"**
+- Or navbar **"Showtimes"**
+- Select Theatre: **"Cineplex Downtown"**
+- Select Date: **Today's date**
+- Click **"Find Showtimes"**
+- Click **"Select Seats"** for any showing
+
+**3. Select Seats**
+- Click on available seats
+- Click **"Continue to Checkout"**
+
+**4. Complete Purchase**
+- Fill in customer information
+  - Phone number optional
+- Select Discount
+- Click **"Complete Purchase"**
+
+**5. View Confirmation**
+- Note your **Order Code**
+- Review ticket details
+- Price reflects discounts and premium seats
+
+**6. Lookup Tickets**
+- Navbar → **"My Tickets"**
+- Enter email: `john.smith1@email.com` OR Order Code: `A7B3C9F1`
+- Click **"Search Tickets"**
+- View existing tickets from the pre-loaded demo data
+
+**7. Refund a Ticket**
+- From My Tickets page
+- Click **"Refund"** on any Active ticket
+- Confirm the refund
+- Status changes to "Refunded"
+
+**8. View Reports**
+- Navbar → **"Reports"**
