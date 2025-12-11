@@ -1,8 +1,8 @@
 # Rivera Cinemas - Movie Theatre System
 
 **CPSC 332 Database Project - Part C**  
-**Student:** Andrew Rivera  
-**Course:** File Structures and Databases
+**Created by:** Andrew Rivera  
+**Course:** CPSC332 - File Structures and Databases
 
 A movie theatre ticket booking system built with PHP and MySQL.
 
@@ -60,7 +60,7 @@ define('DB_USER', 'root');
 define('DB_PASS', 'your_password');
 ```
 
-### 4. Start the Application
+### 4. Starting the Application
 
 **Using XAMPP:**
 
@@ -75,7 +75,7 @@ define('DB_PASS', 'your_password');
 
 ### Demo Customers with Pre-Loaded Tickets
 
-**The database includes 70 pre-existing customers with 450+ tickets already purchased.** You can test the "My Tickets" feature with these accounts:
+**The database includes 70 existing customers with 450+ tickets already purchased.** You can test the "My Tickets" feature with these accounts:
 
 - **Email:** `john.smith1@email.com` OR **Order Code:** `A7B3C9F1`
 - **Email:** `emma.johnson2@email.com` OR **Order Code:** `D4E6F8A2`
@@ -85,21 +85,21 @@ define('DB_PASS', 'your_password');
 
 The database contains 15 movies:
 
-1. **Avengers: Endgame** (PG-13, Action, 2019)
-2. **Avatar: The Way of Water** (PG-13, Sci-Fi, 2022)
-3. **Spider-Man: No Way Home** (PG-13, Action, 2021)
-4. **Top Gun: Maverick** (PG-13, Action, 2022)
-5. **Barbie** (PG-13, Comedy, 2023)
-6. **Oppenheimer** (R, Drama, 2023)
-7. **Inside Out 2** (PG, Family, 2024)
-8. **Dune: Part Two** (PG-13, Sci-Fi, 2024)
-9. **Inception** (PG-13, Sci-Fi, 2010)
-10. **The Batman** (PG-13, Action, 2022)
-11. **Guardians of the Galaxy** (PG-13, Action, 2014)
-12. **Black Panther** (PG-13, Action, 2018)
-13. **Interstellar** (PG-13, Sci-Fi, 2014)
-14. **Deadpool & Wolverine** (R, Action, 2024)
-15. **The Super Mario Bros Movie** (PG, Family, 2023)
+1. **Avengers: Endgame**
+2. **Avatar: The Way of Water**
+3. **Spider-Man: No Way Home**
+4. **Top Gun: Maverick**
+5. **Barbie**
+6. **Oppenheimer**
+7. **Inside Out 2**
+8. **Dune: Part Two**
+9. **Inception**
+10. **The Batman**
+11. **Guardians of the Galaxy**
+12. **Black Panther**
+13. **Interstellar**
+14. **Deadpool & Wolverine**
+15. **The Super Mario Bros Movie** 
 
 ### Theatres
 
@@ -109,7 +109,7 @@ The database contains 15 movies:
 
 ### Showtimes
 
-All showtimes use dynamic dates (CURDATE() + intervals), so they're always current with 90 total showtimes across 7-8 days
+All showtimes use dynamic dates (CURDATE() + intervals), so they're always current with 90 total showtimes across 7 days
 
 ---
 
