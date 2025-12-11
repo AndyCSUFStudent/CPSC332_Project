@@ -1,10 +1,10 @@
-# Rivera Cinemas - Movie Theatre Ticket System
+# Rivera Cinemas - Movie Theatre System
 
 **CPSC 332 Database Project - Part C**  
 **Student:** Andrew Rivera  
-**Course:** Database Management Systems
+**Course:** File Structures and Databases
 
-A complete movie theatre ticket booking system built with PHP and MySQL, featuring seat selection, discount management, and business analytics.
+A movie theatre ticket booking system built with PHP and MySQL.
 
 ---
 
@@ -21,7 +21,7 @@ A complete movie theatre ticket booking system built with PHP and MySQL, featuri
 
 ### 1. Extract Project Files
 
-Extract the project ZIP file to your desired location. You should see:
+Extract the project ZIP file. Inside you should see:
 - `public/` folder with PHP files
 - `includes/` folder with configuration files
 - `assets/` folder with CSS
@@ -67,7 +67,7 @@ define('DB_PASS', 'your_password');
 1. Copy project folder to `htdocs` (XAMPP)
 2. Configure virtual host to point to the `public` folder
 3. Start Apache server
-4. Visit: `http://localhost/rivera-cinemas/`
+4. Visit: `http://localhost/rivera-cinemas/public`
 
 ---
 
@@ -77,9 +77,9 @@ define('DB_PASS', 'your_password');
 
 **The database includes 70 pre-existing customers with 450+ tickets already purchased.** You can test the "My Tickets" feature with these accounts:
 
-- **Email:** `john.smith1@email.com` → **Order Code:** `A7B3C9F1`
-- **Email:** `emma.johnson2@email.com` → **Order Code:** `D4E6F8A2`
-- **Email:** `michael.williams3@email.com` → **Order Code:** `E9C2B5F3`
+- **Email:** `john.smith1@email.com` OR **Order Code:** `A7B3C9F1`
+- **Email:** `emma.johnson2@email.com` OR **Order Code:** `D4E6F8A2`
+- **Email:** `michael.williams3@email.com` OR **Order Code:** `E9C2B5F3`
 
 ### Sample Movies Available
 
@@ -109,8 +109,7 @@ The database contains 15 movies:
 
 ### Showtimes
 
-All showtimes use dynamic dates (CURDATE() + intervals), so they're always current:
-- **90 total showtimes** across 7-8 days
+All showtimes use dynamic dates (CURDATE() + intervals), so they're always current with 90 total showtimes across 7-8 days
 
 ---
 
@@ -118,7 +117,7 @@ All showtimes use dynamic dates (CURDATE() + intervals), so they're always curre
 
 ### Test with Pre-Loaded Demo Data
 
-1. Go to `http://localhost:8000`
+1. Go to `http://localhost/rivera-cinemas/public`
 2. Click navbar **"My Tickets"**
 3. Enter email: `john.smith1@email.com` OR Order Code: `A7B3C9F1`
 4. Click **"Search Tickets"**
@@ -131,7 +130,7 @@ All showtimes use dynamic dates (CURDATE() + intervals), so they're always curre
 **Full walkthrough of creating a new ticket purchase:**
 
 **1. Browse Movies**
-- Go to `http://localhost:8000`
+- Go to `http://localhost/rivera-cinemas/public`
 - Click **"View All Movies"** or navbar **"Movies"**
 - Filter by rating: Select **"PG-13"**
 - Click on **"Dune: Part Two"** to view details
