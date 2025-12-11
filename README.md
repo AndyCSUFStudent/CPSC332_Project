@@ -1,6 +1,5 @@
 # Rivera Cinemas - Movie Theatre System
-
-**CPSC 332 Database Project - Part C**  
+ 
 **Created by:** Andrew Rivera  
 **Course:** CPSC332 - File Structures and Databases
 
